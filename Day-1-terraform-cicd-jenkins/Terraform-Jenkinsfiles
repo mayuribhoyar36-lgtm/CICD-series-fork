@@ -466,3 +466,32 @@ pipeline {
         }
     }
 }
+
+
+
+//scripted pipeline//
+
+node ('dev') {
+    
+    stage ('prepearation') {
+       git branch: 'main',  url: 'https://github.com/mayuribhoyar36-lgtm/07-00pmTerraform-fork.git'
+    }
+    
+     stage ('Init') {
+         dir ('Day-1-basic-config-files') {
+             sh 'terraform init'
+         }
+    }
+    
+    stage ('Plan') {
+         dir ('Day-1-basic-config-files') {
+             sh 'terraform plan'
+         }
+    }
+    
+    stage ('Apply') {
+         dir ('Day-1-basic-config-files') {
+             sh 'terraform apply -auto-approve'
+         }
+    }
+}
